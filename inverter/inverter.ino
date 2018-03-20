@@ -1,3 +1,4 @@
+#include "lookupTable_SINE.h"
 
 
 HardwareTimer timerFour(4); //timerfour will generate the Carrier of 20KHz, i.e 50us
@@ -24,6 +25,7 @@ void setupTimers()
     timerThree.refresh();
 }
 unsigned int positionInarray=0;
+
 void load_from_table(){
     pwmWrite(PB6, sineLookup[positionInarray] );
     positionInarray++;
