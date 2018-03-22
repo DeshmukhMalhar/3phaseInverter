@@ -4,6 +4,7 @@
 HardwareTimer timerFour(4); //timerfour will generate the Carrier of 20KHz, i.e 50us
 HardwareTimer timerThree(3);
 int ovf4;
+int arrLastElement;
 void setupTimers()
 {
     //for timer 4, having PWM on PB6:8
@@ -29,12 +30,15 @@ unsigned int positionInarray=0;
 void load_from_table(){
     pwmWrite(PB6, sineLookup[positionInarray] );
     positionInarray++;
+    if(positionInarray>=arrLastElement){
+        positionInarray=0;
+    }
 
 }
 void setup()
 {
     Serial.begin();
-
+    arrLastElement=sizeof(sineLookup)/sizeof(int);
     setupTimers();
 
     pinMode(PB6, PWM);
